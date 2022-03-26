@@ -1,4 +1,5 @@
 using Darnton.Blazor.DeviceInterop.Geolocation;
+using IDB_Weather.Helper;
 using IDB_Weather.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddServerSideBlazor();
 //Add the interfaces used in the application
 builder.Services.AddScoped<IWeatherClientService, WeatherClientService>();
 builder.Services.AddScoped<IGeolocationService, GeolocationService>();
+builder.Services.AddScoped<AppState>();
 
 var app = builder.Build();
 

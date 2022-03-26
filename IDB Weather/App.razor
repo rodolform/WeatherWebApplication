@@ -1,4 +1,6 @@
-﻿<FluentDesignSystemProvider AccentBaseColor="#D83B01" BaseLayerLuminance="0">
+﻿@inject AppState AppState
+
+<FluentDesignSystemProvider AccentBaseColor="#D83B01" BaseLayerLuminance="AppState.SelectedLightMode">
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -12,3 +14,12 @@
         </NotFound>
     </Router>
 </FluentDesignSystemProvider>
+
+@code{
+
+    protected override void OnInitialized()
+    {
+        //This will allos to cascade tje selected value from NavMenu component
+         AppState.OnChange += StateHasChanged;
+    }
+}
