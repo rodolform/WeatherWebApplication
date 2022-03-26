@@ -15,13 +15,44 @@
             </span>
             <br/>
             <h1 style="font-weight: bold">
-                @weatherForecast?.name
+                @weatherForecast?.city.name | @weatherForecast?.city.country
             </h1>
         </div>
     </div>
+    <br/>
+    <div class="row" style="margin-left:30px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Temperature</th>
+                    <th>Weather</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var forecast in weatherForecast?.list)
+                {
+                    <tr>
+                        <td>@forecast?.dt</td>
+                        <td>
+                            <div style="display: flex">
+                                <img src="@forecast?.iconUrl" />
+                                <h3 style="margin-top: 5px;">
+                                    @forecast?.main?.temp°@(units == Units.imperial ? "F" : "C")
+                                </h3>
+                            </div>
+                        </td>
+                        <td>@forecast?.weather?.FirstOrDefault()?.main</td>
+                        <td>@forecast?.weather?.FirstOrDefault()?.description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
-@if(weatherForecast ==null || string.IsNullOrEmpty(weatherForecast.@base))
+@if(weatherForecast ==null || string.IsNullOrEmpty(weatherForecast.cod))
 {
     <div class="row" style="margin-left:30px; text-align: center">        
         <h3 style="color: #eb6e4b; margin-top: 20px">The city was not found or data is empty please try again</h3>

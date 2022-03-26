@@ -1,4 +1,5 @@
 ﻿using Darnton.Blazor.DeviceInterop.Geolocation;
+using IDB_Weather.Data.ModelForecast;
 using IDB_Weather.Data.Models;
 using Microsoft.AspNetCore.Components;
 using System.Text.Json;
@@ -8,6 +9,7 @@ namespace IDB_Weather.Services
     public interface IWeatherClientService
     {
         Task<CurrentWeather> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
+        Task<WeatherForecast> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
     }
 
     public class WeatherClientService : IWeatherClientService
@@ -82,9 +84,9 @@ namespace IDB_Weather.Services
             return weatherForecast;
         }
 
-        public async Task<CurrentWeather> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
+        public async Task<WeatherForecast> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
         {
-            CurrentWeather weatherForecast = new CurrentWeather();
+            WeatherForecast weatherForecast = new WeatherForecast();
 
             try
             {
@@ -116,12 +118,15 @@ namespace IDB_Weather.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                    weatherForecast = await JsonSerializer.DeserializeAsync<CurrentWeather>(await response.Content.ReadAsStreamAsync(), options);
+                    weatherForecast = await JsonSerializer.DeserializeAsync<WeatherForecast>(await response.Content.ReadAsStreamAsync(), options);
 
                     //Create the icon url based on the result and from app settings file
-                    if (weatherForecast != null)
+                    if (weatherForecast != null && weatherForecast.list != null)
                     {
-                        weatherForecast.iconUrl = $"{_configuration["Application:openweathericon"]}{weatherForecast.weather?.FirstOrDefault().icon}.png";
+                        foreach (var item in weatherForecast.list)
+                        {
+                            item.iconUrl = $"{_configuration["Application:openweathericon"]}{item.weather?.FirstOrDefault().icon}.png";
+                        }
                     }
                 }
             }

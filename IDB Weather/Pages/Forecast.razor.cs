@@ -1,5 +1,6 @@
 ﻿using Blazor.Page;
 using Darnton.Blazor.DeviceInterop.Geolocation;
+using IDB_Weather.Data.ModelForecast;
 using IDB_Weather.Data.Models;
 using IDB_Weather.Helper;
 using IDB_Weather.Services;
@@ -21,7 +22,7 @@ namespace IDB_Weather.Pages
         public string lat { get; set; }
         public string lon { get; set; }
 
-        public CurrentWeather weatherForecast { get; set; }
+        public WeatherForecast weatherForecast { get; set; }
         public Units units { get; set; } = Units.imperial;
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace IDB_Weather.Pages
                 lat = CurrentLatitude;
                 lon = CurrentLongitude;
 
-                weatherForecast = await weatherClientService.GetCurrentWeatherAsync(units, "EN", lat, lon);
+                weatherForecast = await weatherClientService.GetForecast5DaysWeatherAsync(units, "EN", lat, lon);
                 StateHasChanged();
             }
         }
@@ -78,7 +79,7 @@ namespace IDB_Weather.Pages
         {
             try
             {
-                weatherForecast = await weatherClientService.GetCurrentWeatherAsync(units, "EN", null, null, _city);
+                weatherForecast = await weatherClientService.GetForecast5DaysWeatherAsync(units, "EN", null, null, _city);
                 StateHasChanged();
             }
             catch (Exception ex)
@@ -94,7 +95,7 @@ namespace IDB_Weather.Pages
         {
             units = AppState.SelectedUnit ? Units.metric : Units.imperial;
 
-            weatherForecast = weatherClientService.GetCurrentWeatherAsync(units, "EN", lat, lon, AppState.SelectedCity).Result;
+            weatherForecast = weatherClientService.GetForecast5DaysWeatherAsync(units, "EN", lat, lon, AppState.SelectedCity).Result;
             StateHasChanged();
         }
 
