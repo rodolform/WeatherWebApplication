@@ -94,7 +94,7 @@ namespace IDB_Weather.Pages
         {
             units = AppState.SelectedUnit ? Units.metric : Units.imperial;
 
-            weatherForecast = weatherClientService.GetCurrentWeatherAsync(units, "EN", lat, lon).Result;
+            weatherForecast = weatherClientService.GetCurrentWeatherAsync(units, "EN", lat, lon, AppState.SelectedCity).Result;
             StateHasChanged();
         }
 
@@ -132,17 +132,6 @@ namespace IDB_Weather.Pages
                 Console.WriteLine(ex.Message);
             }
             return result;
-        }
-
-        /// <summary>
-        /// Get the current weather
-        /// </summary>
-        /// <returns></returns>
-        public async Task GetCurrentWeatherAsync()
-        {
-            var result = await weatherClientService.GetCurrentWeatherAsync(units, "EN", lat, lon);
-
-            var res = result;
         }
     }
 }

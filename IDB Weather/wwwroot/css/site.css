@@ -77,7 +77,7 @@ a, .btn-link {
 .labelSmallBoldOrangeRed {
     font-size: small;
     font-weight: bold;
-    color: orangered
+    color: #eb6e4b;
 }
 
 .text-container {
@@ -85,7 +85,7 @@ a, .btn-link {
 }
 
 .orange-side {
-    border-left: 1px solid #eb6e4b;
+    border-left: 3px solid #eb6e4b;
 }
 
 ul.no-bullets {

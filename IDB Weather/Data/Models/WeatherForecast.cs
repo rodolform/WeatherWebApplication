@@ -64,7 +64,7 @@ namespace IDB_Weather.Data.Models
 
         public string iconUrl { get; set; }
 
-        public string sunriseLocal => UTCTimeConverter.ConvertTime(sys.sunrise);
-        public string sunsetLocal => UTCTimeConverter.ConvertTime(sys.sunset);
+        public string sunriseLocal => UTCTimeConverter.ConvertTime(sys != null ? sys.sunrise : 0);
+        public string sunsetLocal => UTCTimeConverter.ConvertTime(sys != null ? sys.sunset : 0);
     }    
 }

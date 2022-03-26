@@ -32,8 +32,15 @@ namespace IDB_Weather.Services
 
             try
             {
+                if (!string.IsNullOrEmpty(_city))
+                {
+                    _lat = null;
+                    _lon = null;
+                }
+                string prefix = _configuration["Application:openweathermapUri"];
                 using var client = new HttpClient();
-                string uri = $"{_configuration["Application:openweathermapUri"]}{_configuration["Application:openweatherAPIKey"]}";
+               
+                string uri = $"{prefix}{_configuration["Application:openweatherAPIKey"]}";
 
                 if (!string.IsNullOrEmpty(_lat) && !string.IsNullOrEmpty(_lon))
                 {
@@ -65,20 +72,62 @@ namespace IDB_Weather.Services
                     {
                         weatherForecast.iconUrl = $"{_configuration["Application:openweathericon"]}{weatherForecast.weather?.FirstOrDefault().icon}.png";
                     }
-
-                    // logger.LogInformation($"Result of web service serialized: {serializedResult}");
-                    // logger.LogInformation($"{nameof(this.GetCurrentWeather)} StatusCode {response.StatusCode} - {response.ReasonPhrase}");
-
-                }
-                else
-                {
-                    //logger.LogError($"Error on {nameof(this.GetCurrentWeather)} StatusCode {response.StatusCode} - {response.ReasonPhrase}");
-                }
-                
+                }                
             }
             catch (Exception ex)
             {
-                //logger.LogError($"Error on {nameof(this.GetCurrentWeather)} : {ex.Message} - {nameof(ex.InnerException)} : {ex.InnerException?.Message} - {nameof(ex.StackTrace)} : {ex.StackTrace}");
+                Console.WriteLine($"Error on {nameof(this.GetCurrentWeatherAsync)} : {ex.Message} - {nameof(ex.InnerException)} : {ex.InnerException?.Message} - {nameof(ex.StackTrace)} : {ex.StackTrace}");
+            }
+
+            return weatherForecast;
+        }
+
+        public async Task<WeatherForecast> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
+        {
+            WeatherForecast weatherForecast = new WeatherForecast();
+
+            try
+            {
+                string prefix = _configuration["Application:openforecastmapUri"];
+                using var client = new HttpClient();
+
+                string uri = $"{prefix}{_configuration["Application:openweatherAPIKey"]}";
+
+                if (!string.IsNullOrEmpty(_lat) && !string.IsNullOrEmpty(_lon))
+                {
+                    uri = uri + $"&lat={_lat}&lon={_lon}";
+                }
+
+                if (!string.IsNullOrEmpty(_city))
+                {
+                    uri = uri + $"&q={_city}";
+                }
+
+                uri = uri + $"&units={_units}";
+
+                var HttpRequest = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(uri),
+                    Method = HttpMethod.Get
+                };
+
+                var response = await client.SendAsync(HttpRequest).ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+                    weatherForecast = await JsonSerializer.DeserializeAsync<WeatherForecast>(await response.Content.ReadAsStreamAsync(), options);
+
+                    //Create the icon url based on the result and from app settings file
+                    if (weatherForecast != null)
+                    {
+                        weatherForecast.iconUrl = $"{_configuration["Application:openweathericon"]}{weatherForecast.weather?.FirstOrDefault().icon}.png";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {nameof(this.GetForecast5DaysWeatherAsync)} : {ex.Message} - {nameof(ex.InnerException)} : {ex.InnerException?.Message} - {nameof(ex.StackTrace)}");
             }
 
             return weatherForecast;
