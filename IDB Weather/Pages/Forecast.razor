@@ -1,0 +1,44 @@
+﻿@page "/forecast"
+@using IDB_Weather.Data.Models
+
+@inherits ForecastRazor 
+
+<PageTitle>IDB Weather</PageTitle>
+
+<br/>
+@if (weatherForecast != null)
+{
+    <div class="row" style="margin-left:30px;">
+        <div class="col-5">
+            <span class="labelSmallBoldOrangeRed">
+                @DateTime.Now.ToLongDateString(), @DateTime.Now.ToLongTimeString()
+            </span>
+            <br/>
+            <h1 style="font-weight: bold">
+                @weatherForecast?.name
+            </h1>
+        </div>
+    </div>
+}
+
+@if(weatherForecast ==null || string.IsNullOrEmpty(weatherForecast.@base))
+{
+    <div class="row" style="margin-left:30px; text-align: center">        
+        <h3 style="color: #eb6e4b; margin-top: 20px">The city was not found or data is empty please try again</h3>
+        <br/>
+        <div>
+            <img src="/images/noresults.gif"/>
+        </div>
+    </div>
+}
+
+<ErrorBoundary>
+    <ChildContent>
+        
+    </ChildContent>
+    <ErrorContent>
+        <div class="alert alert-danger">
+            There was an error! 
+        </div>
+    </ErrorContent>
+</ErrorBoundary>
