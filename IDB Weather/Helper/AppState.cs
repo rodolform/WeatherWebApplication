@@ -12,6 +12,22 @@
             NotifyStateChanged();
         }
 
+        //set city
+        public string? SelectedCity { get; private set; }
+        public void SetCity(string? _city)
+        {
+            SelectedCity = _city;
+            NotifyStateChanged();
+        }
+
+        //set unit
+        public bool SelectedUnit { get; private set; }
+        public void SetUnit(bool _unit)
+        {
+            SelectedUnit = _unit;
+            NotifyStateChanged();
+        }
+
         //Replicate the event
         private void NotifyStateChanged() => OnChange?.Invoke();
     }

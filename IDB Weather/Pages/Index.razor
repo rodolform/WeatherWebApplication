@@ -18,7 +18,7 @@
         <div style="display: flex">
             <img src="@weatherForecast?.iconUrl" />
             <h3 style="margin-top: 5px;">
-                @weatherForecast?.main?.temp°@(units == Units.standard ? "F" : "C")
+                @weatherForecast?.main?.temp°@(units == Units.imperial ? "F" : "C")
             </h3>
             <table class="table" style="margin-left:50px;margin-top: -8px;width: 180px;">
                 <tr>
@@ -34,20 +34,20 @@
                 </tr>
                 <tr>
                      <td style="width: 40%">
-                         @weatherForecast?.main?.temp_max°@(units == Units.standard ? "F" : "C")
+                         @weatherForecast?.main?.temp_max°@(units == Units.imperial ? "F" : "C")
                     </td>
                     <td style="width: 10%">
                         &nbsp;
                     </td>
                      <td style="width: 50%">
-                        @weatherForecast?.main?.temp_min   °@(units == Units.standard ? "F" : "C")
+                        @weatherForecast?.main?.temp_min   °@(units == Units.imperial ? "F" : "C")
                     </td>
                 </tr>
             </table>            
         </div>
         <div>
             <span class="labelSmallBold">
-                Feels like @weatherForecast?.main?.feels_like°@(units == Units.standard ? "F" : "C") |
+                Feels like @weatherForecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C") |
                 @weatherForecast?.weather?.FirstOrDefault()?.main | @weatherForecast?.weather?.FirstOrDefault()?.description
             </span>
             <ul class="weather-items orange-side standard-padding no-bullets">

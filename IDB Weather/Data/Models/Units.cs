@@ -2,7 +2,7 @@
 {
     public enum Units
     {
-        standard,
+        imperial,
         metric
     }
 }

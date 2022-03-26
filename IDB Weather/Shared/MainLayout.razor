@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
+@inject AppState AppState
+
 <PageTitle>IDB Weather</PageTitle>
 
 <div class="page">
@@ -15,7 +17,7 @@
                 </div>
                 <div class="col-3">
                     <div style="display: flex; margin-top: 4px">
-                        <FluentTextField Placeholder="Search city" style="width: 100%" />
+                        <FluentTextField Placeholder="Search city" bind-Value="@City" style="width: 100%" />
                         <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth">
                             <span class="oi oi-magnifying-glass"></span>
                         </FluentButton>
@@ -28,7 +30,7 @@
                     <div style="margin: 8px 40px">
                         <span class="labelSmall">Fahrenheit</span>
                         &nbsp;
-                        <FluentSwitch @bind-Value="@Unit" style="vertical-align: middle"></FluentSwitch>
+                        <FluentSwitch ValueChanged="@((e) => OnModeChanged(e))" style="vertical-align: middle"></FluentSwitch>
                         &nbsp;
                         <span class="labelSmall">Celsius</span>
                     </div>
@@ -44,7 +46,10 @@
 
 @code
 {
-    bool Unit = false;
+    string City;
 
-
+    public void OnModeChanged(bool unit)
+    {
+        AppState.SetUnit(unit);
+    }
 }
