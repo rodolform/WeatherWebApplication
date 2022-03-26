@@ -4,6 +4,7 @@
     {
         public event Action OnChange;
         public event Action OnChangeLocation;
+        public event Action OnChangeCity;
 
         //set light or dark mode
         public float? SelectedLightMode { get; private set; } = 1;
@@ -18,7 +19,7 @@
         public void SetCity(string? _city)
         {
             SelectedCity = _city;
-            NotifyStateChanged();
+            NotifyStateChangedCity();
         }
 
         //set unit
@@ -40,5 +41,8 @@
 
         //Replicate the event for location
         private void NotifyStateChangedLocation() => OnChangeLocation?.Invoke();
+
+        //Replicate the event for new city
+        private void NotifyStateChangedCity() => OnChangeCity?.Invoke();
     }
 }

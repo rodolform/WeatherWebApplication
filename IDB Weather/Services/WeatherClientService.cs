@@ -7,7 +7,7 @@ namespace IDB_Weather.Services
 {
     public interface IWeatherClientService
     {
-        Task<WeatherForecast> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon);
+        Task<WeatherForecast> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
     }
 
     public class WeatherClientService : IWeatherClientService
@@ -26,14 +26,26 @@ namespace IDB_Weather.Services
         /// <param name="_units"></param>
         /// <param name="_lang"></param>
         /// <returns></returns>
-        public async Task<WeatherForecast> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon)
+        public async Task<WeatherForecast> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
         {
             WeatherForecast weatherForecast = new WeatherForecast();
 
             try
             {
                 using var client = new HttpClient();
-                string uri = $"{_configuration["Application:openweathermapUri"]}{_configuration["Application:openweatherAPIKey"]}&lat={_lat}&lon={_lon}&units={_units}";
+                string uri = $"{_configuration["Application:openweathermapUri"]}{_configuration["Application:openweatherAPIKey"]}";
+
+                if (!string.IsNullOrEmpty(_lat) && !string.IsNullOrEmpty(_lon))
+                {
+                    uri = uri + $"&lat={_lat}&lon={_lon}";
+                }
+
+                if (!string.IsNullOrEmpty(_city))
+                {
+                    uri = uri + $"&q={_city}";
+                }
+
+                uri = uri + $"&units={_units}";
 
                 var HttpRequest = new HttpRequestMessage
                 {

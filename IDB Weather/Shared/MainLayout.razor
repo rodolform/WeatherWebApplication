@@ -17,13 +17,13 @@
                 </div>
                 <div class="col-3">
                     <div style="display: flex; margin-top: 4px">
-                        <FluentTextField Placeholder="Search city" bind-Value="@City" style="width: 100%" />
-                        <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth">
+                        <FluentTextField Placeholder="Search city" @bind-Value="@City" style="width: 100%" />
+                        <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth" @onclick="OnClickFindLocation">
                             <span class="oi oi-magnifying-glass"></span>
                         </FluentButton>
                        <FluentButton style="margin-left: 7px" Appearance="Appearance.Stealth" @onclick="OnClickCurrentLocation">
                             <span class="oi oi-map-marker"></span>
-                        </FluentButton>
+                        </FluentButton>                        
                     </div>
                 </div>
                 <div class="col-7">
@@ -56,5 +56,10 @@
     public void OnClickCurrentLocation()
     {
         AppState.SetCurrentLocation();
+    }
+
+    public void OnClickFindLocation()
+    {
+        AppState.SetCity(City);
     }
 }

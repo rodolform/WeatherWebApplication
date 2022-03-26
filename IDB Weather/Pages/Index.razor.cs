@@ -29,11 +29,14 @@ namespace IDB_Weather.Pages
         /// </summary>
         protected override void OnInitialized()
         {
-            //This will allos to cascade the selected value from NavMenu component
+            //This will allow to cascade the selected value from NavMenu component
             AppState.OnChange += Reload;
 
-            //This will allos to cascade the click event NavMenu component
+            //This will allow to cascade the click event NavMenu component
             AppState.OnChangeLocation += ReloadLocationAndData;
+
+            //This will allow to cascade the click event NavMenu component
+            AppState.OnChangeCity += LoadCityData;
         }
 
         /// <summary>
@@ -68,6 +71,23 @@ namespace IDB_Weather.Pages
         }
 
         /// <summary>
+        /// Get City Position And Refresh Data
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetCityPositionAndRefreshDataAsync(string _city)
+        {
+            try
+            {
+                weatherForecast = await weatherClientService.GetCurrentWeatherAsync(units, "EN", null, null, _city);
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Reload data
         /// </summary>
         private void Reload()
@@ -84,6 +104,15 @@ namespace IDB_Weather.Pages
         private void ReloadLocationAndData()
         {
             _ = GetCurrentPositionAndRefreshDataAsync();
+            StateHasChanged();
+        }
+
+        /// <summary>
+        /// Load City Data
+        /// </summary>
+        private void LoadCityData()
+        {
+            _ = GetCityPositionAndRefreshDataAsync(AppState.SelectedCity);
             StateHasChanged();
         }
 
