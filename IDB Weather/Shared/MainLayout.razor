@@ -21,7 +21,7 @@
                         <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth">
                             <span class="oi oi-magnifying-glass"></span>
                         </FluentButton>
-                       <FluentButton style="margin-left: 7px" Appearance="Appearance.Stealth">
+                       <FluentButton style="margin-left: 7px" Appearance="Appearance.Stealth" @onclick="OnClickCurrentLocation">
                             <span class="oi oi-map-marker"></span>
                         </FluentButton>
                     </div>
@@ -51,5 +51,10 @@
     public void OnModeChanged(bool unit)
     {
         AppState.SetUnit(unit);
+    }
+
+    public void OnClickCurrentLocation()
+    {
+        AppState.SetCurrentLocation();
     }
 }

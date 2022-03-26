@@ -3,6 +3,7 @@
     public class AppState
     {
         public event Action OnChange;
+        public event Action OnChangeLocation;
 
         //set light or dark mode
         public float? SelectedLightMode { get; private set; } = 1;
@@ -28,7 +29,16 @@
             NotifyStateChanged();
         }
 
+        //Set CurrentLocation        
+        public void SetCurrentLocation()
+        {
+            NotifyStateChangedLocation();
+        }
+
         //Replicate the event
         private void NotifyStateChanged() => OnChange?.Invoke();
+
+        //Replicate the event for location
+        private void NotifyStateChangedLocation() => OnChangeLocation?.Invoke();
     }
 }
