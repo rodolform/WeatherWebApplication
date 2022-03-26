@@ -21,7 +21,7 @@ namespace IDB_Weather.Pages
         public string lat { get; set; }
         public string lon { get; set; }
 
-        public WeatherForecast weatherForecast { get; set; }
+        public CurrentWeather weatherForecast { get; set; }
         public Units units { get; set; } = Units.imperial;
 
         /// <summary>

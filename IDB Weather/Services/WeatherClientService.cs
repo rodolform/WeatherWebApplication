@@ -7,7 +7,7 @@ namespace IDB_Weather.Services
 {
     public interface IWeatherClientService
     {
-        Task<WeatherForecast> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
+        Task<CurrentWeather> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
     }
 
     public class WeatherClientService : IWeatherClientService
@@ -26,9 +26,9 @@ namespace IDB_Weather.Services
         /// <param name="_units"></param>
         /// <param name="_lang"></param>
         /// <returns></returns>
-        public async Task<WeatherForecast> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
+        public async Task<CurrentWeather> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
         {
-            WeatherForecast weatherForecast = new WeatherForecast();
+            CurrentWeather weatherForecast = new CurrentWeather();
 
             try
             {
@@ -65,7 +65,7 @@ namespace IDB_Weather.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                    weatherForecast = await JsonSerializer.DeserializeAsync<WeatherForecast>(await response.Content.ReadAsStreamAsync(), options);
+                    weatherForecast = await JsonSerializer.DeserializeAsync<CurrentWeather>(await response.Content.ReadAsStreamAsync(), options);
 
                     //Create the icon url based on the result and from app settings file
                     if (weatherForecast != null)
@@ -82,9 +82,9 @@ namespace IDB_Weather.Services
             return weatherForecast;
         }
 
-        public async Task<WeatherForecast> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
+        public async Task<CurrentWeather> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null)
         {
-            WeatherForecast weatherForecast = new WeatherForecast();
+            CurrentWeather weatherForecast = new CurrentWeather();
 
             try
             {
@@ -116,7 +116,7 @@ namespace IDB_Weather.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                    weatherForecast = await JsonSerializer.DeserializeAsync<WeatherForecast>(await response.Content.ReadAsStreamAsync(), options);
+                    weatherForecast = await JsonSerializer.DeserializeAsync<CurrentWeather>(await response.Content.ReadAsStreamAsync(), options);
 
                     //Create the icon url based on the result and from app settings file
                     if (weatherForecast != null)

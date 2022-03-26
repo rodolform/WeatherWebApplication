@@ -46,7 +46,7 @@ namespace IDB_Weather.Data.Models
         public int sunset { get; set; }
     }
 
-    public class WeatherForecast
+    public class CurrentWeather
     {
         public Coord coord { get; set; }
         public List<Weather> weather { get; set; }
