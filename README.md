@@ -29,6 +29,11 @@ URL to get dinamycally get the weather icon: http://openweathermap.org/img/w/
 
 **Several screenshots:**
 
+**ALLOW ACCESS FOR GEOLOCATION**
+
+![image](https://user-images.githubusercontent.com/34136023/160300129-05305428-d964-42a4-9475-e49b41da3474.png)
+
+
 **UNIT TESTS**
 
 ![image](https://user-images.githubusercontent.com/34136023/160299418-ca2135bc-7108-4702-97bb-8ca39e18e484.png)
