@@ -100,3 +100,17 @@ ul.no-bullets {
     height: 12pt;
     width: auto;
 }
+
+.table {
+    background-color: white;
+}
+
+    .table th {
+        border: none;
+        font-size: medium;
+        background-color: #D6DDE5;
+    }
+
+    .table td {
+        font-size: small;
+    }

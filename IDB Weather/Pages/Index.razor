@@ -18,11 +18,11 @@
                 @weatherForecast?.name
             </h1>        
             <div style="display: flex">
-                <img src="@weatherForecast?.iconUrl" />
-                <h3 style="margin-top: 5px;">
+                <img src="@weatherForecast?.iconUrl" style="height: 60px" />
+                <h1 style="margin-top: 5px;">
                     @weatherForecast?.main?.temp°@(units == Units.imperial ? "F" : "C")
-                </h3>
-                <table class="table" style="margin-left:50px;margin-top: -8px;width: 180px;">
+                </h1>
+                <table style="margin-left:70px;margin-top: -8px;width: 180px;">
                     <tr>
                         <td style="width: 40%">
                             <span class="labelSmallBold">min</span>
@@ -47,11 +47,12 @@
                     </tr>
                 </table>            
             </div>
+            <br/>
             <div>
-                <span class="labelSmallBold">
+                <b>
                     Feels like @weatherForecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C") |
                     @weatherForecast?.weather?.FirstOrDefault()?.main | @weatherForecast?.weather?.FirstOrDefault()?.description
-                </span>
+                </b>
                 <ul class="weather-items orange-side standard-padding no-bullets">
                     <li>
                         <div>
@@ -103,7 +104,7 @@
         </div>
 
         <div class=col-6>
-            <div class="row">
+            <div class="row" style="margin-top:80px">
                 <div class="col-12" style="display:flex">                
                     <img src="/images/icons8-sunrise-48.png"/>
                     <h4 style="margin-left: 20px; margin-top: 10px">sunrise: @weatherForecast?.sunriseLocal</h4>                 

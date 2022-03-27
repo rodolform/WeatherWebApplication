@@ -59,6 +59,7 @@ namespace IDB_Weather.Data.ModelForecast
         public Rain rain { get; set; }
 
         public string iconUrl { get; set; }
+        public string dtLocal => UTCTimeConverter.ConvertTime(dt);
     }
 
     public class Coord
