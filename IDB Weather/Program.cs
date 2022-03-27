@@ -1,6 +1,6 @@
 using Darnton.Blazor.DeviceInterop.Geolocation;
 using IDB.Weather.Model.Helper;
-using IDB_Weather.Services;
+using IDB.Weather.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

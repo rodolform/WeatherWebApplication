@@ -2,7 +2,7 @@
 using Darnton.Blazor.DeviceInterop.Geolocation;
 using IDB.Weather.Model.Helper;
 using IDB.Weather.Model.Models;
-using IDB_Weather.Services;
+using IDB.Weather.Services.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace IDB_Weather.Pages

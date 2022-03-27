@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
@@ -20,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IDB.Weather.Model\IDB.Weather.Model.csproj" />
+    <ProjectReference Include="..\IDB.Weather.Services\IDB.Weather.Services.csproj" />
   </ItemGroup>
 
 </Project>
