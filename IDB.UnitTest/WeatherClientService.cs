@@ -1,26 +1,15 @@
 ﻿using IDB.Weather.Model.ModelForecast;
 using IDB.Weather.Model.Models;
-using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
-namespace IDB.Weather.Services.Services
+namespace IDB.UnitTest
 {
-    public interface IWeatherClientService
+    internal class WeatherClientService
     {
-        Task<CurrentWeather> GetCurrentWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
-        Task<WeatherForecast> GetForecast5DaysWeatherAsync(Units _units, string _lang, string _lat, string _lon, string _city = null);
-    }
-
-    public class WeatherClientService : IWeatherClientService
-    {
-        //private readonly ILogger logger;
-        private readonly IConfiguration _configuration;
-
-        public WeatherClientService(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         /// <summary>
         /// Method to get the current weather from the openwheater uri
         /// </summary>
@@ -38,10 +27,10 @@ namespace IDB.Weather.Services.Services
                     _lat = null;
                     _lon = null;
                 }
-                string prefix = _configuration["Application:openweathermapUri"];
+                string prefix = "https://api.openweathermap.org/data/2.5/weather?appid=";
                 using var client = new HttpClient();
-               
-                string uri = $"{prefix}{_configuration["Application:openweatherAPIKey"]}";
+
+                string uri = $"{prefix}d304084249f663adec55daece137529f";
 
                 if (!string.IsNullOrEmpty(_lat) && !string.IsNullOrEmpty(_lon))
                 {
@@ -71,9 +60,9 @@ namespace IDB.Weather.Services.Services
                     //Create the icon url based on the result and from app settings file
                     if (weatherForecast != null)
                     {
-                        weatherForecast.iconUrl = $"{_configuration["Application:openweathericon"]}{weatherForecast.weather?.FirstOrDefault().icon}.png";
+                        weatherForecast.iconUrl = $"openweathericon{weatherForecast.weather?.FirstOrDefault().icon}.png";
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -98,10 +87,10 @@ namespace IDB.Weather.Services.Services
 
             try
             {
-                string prefix = _configuration["Application:openforecastmapUri"];
+                string prefix = "https://api.openweathermap.org/data/2.5/forecast?appid=";
                 using var client = new HttpClient();
 
-                string uri = $"{prefix}{_configuration["Application:openweatherAPIKey"]}";
+                string uri = $"{prefix}d304084249f663adec55daece137529f";
 
                 if (!string.IsNullOrEmpty(_lat) && !string.IsNullOrEmpty(_lon))
                 {
@@ -133,7 +122,7 @@ namespace IDB.Weather.Services.Services
                     {
                         foreach (var item in weatherForecast.list)
                         {
-                            item.iconUrl = $"{_configuration["Application:openweathericon"]}{item.weather?.FirstOrDefault().icon}.png";
+                            item.iconUrl = $"openweathericon{item.weather?.FirstOrDefault().icon}.png";
                         }
                     }
                 }
@@ -145,5 +134,6 @@ namespace IDB.Weather.Services.Services
 
             return weatherForecast;
         }
+
     }
 }

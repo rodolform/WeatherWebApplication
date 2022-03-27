@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IDB.Weather.Model\IDB.Weather.Model.csproj" />
-    <ProjectReference Include="..\IDB.Weather.Services\IDB.Weather.Services.csproj" />
   </ItemGroup>
 
 </Project>
