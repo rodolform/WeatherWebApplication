@@ -15,7 +15,7 @@
                 <div class="col-12" style="display:flex; width: 100%">
                     <div class="col-10">
                         <div style="display: flex; margin-top: 4px">
-                            <FluentTextField Placeholder="Search city" @bind-Value="@City" style="width: 30%" />                            
+                            <FluentTextField Placeholder="Search city" @bind-Value="@City" style="width: 30%" />
                             <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth" @onclick="OnClickFindLocation">
                                 <span class="oi oi-magnifying-glass"></span>
                             </FluentButton>
@@ -36,25 +36,34 @@
                     </div>
                 </div>
             </div>
-
             <article class="content px-4">
                 <ErrorBoundary @ref="@errorBoundary">
                     <ChildContent>
-                        @Body
-                        </ChildContent>
-                        <ErrorContent>
+                        @if (showCityEmpty)
+                        {
                             <div class="alert alert-danger">
                                 <div style="display: flex">
-                                     <span class="oi oi-circle-x" style="font-size: 2rem"></span>
+                                    <span class="oi oi-magnifying-glass"></span>
                                     &nbsp;
-                                    <b style="margin-left: 10px; margin-top: 8px">Sorry there was an error!</b>
-                                </div>                               
-                            </div>                            
-                        </ErrorContent>
-                    </ErrorBoundary>
-            </article>
+                                    <span style="margin-left: 10px; margin-top: 0px; font-size: small">Please enter the city name</span>
+                                </div>
+                            </div>
+                        }
+                        @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <div class="alert alert-danger">
+                            <div style="display: flex">
+                                    <span class="oi oi-circle-x" style="font-size: 2rem"></span>
+                                &nbsp;
+                                <b style="margin-left: 10px; margin-top: 8px">Sorry there was an error!</b>
+                            </div>
+                        </div>
+                    </ErrorContent>
+                </ErrorBoundary>
+            </article>            
         </main>
-    </div>
+    </div>    
 </FluentDesignSystemProvider>
 
 @code
@@ -62,6 +71,7 @@
     string City;
     private ErrorBoundary errorBoundary;
     public bool isGeolocated { get; set; } = true;
+    public bool showCityEmpty = false;
 
     protected override void OnParametersSet()
     {
@@ -77,6 +87,7 @@
     {        
         isGeolocated = true;
         City = string.Empty;
+        showCityEmpty = false;
         AppState.SetCurrentLocation();
     }
 
@@ -85,7 +96,12 @@
         if(!string.IsNullOrEmpty(City))
         {
             isGeolocated = false;
+            showCityEmpty = false;
             AppState.SetCity(City);
-        }       
+        }
+        else
+        {
+            showCityEmpty = true;
+        }
     }
 }
