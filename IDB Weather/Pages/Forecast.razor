@@ -8,7 +8,7 @@
 <br/>
 @if (weatherForecast != null)
 {
-    <div class="row" style="margin-left:30px;">
+    <div class="row" style="margin-left:15px;">
         <div class="col-5">
             <span class="labelSmallBoldOrangeRed">
                 @DateTime.Now.ToLongDateString(), @DateTime.Now.ToLongTimeString()
@@ -20,7 +20,7 @@
         </div>
     </div>
     <br/>
-    <div class="row" style="margin-left:30px;">
+    <div class="row" style="margin-left:15px;">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -132,7 +132,7 @@
 
 @if(weatherForecast ==null || string.IsNullOrEmpty(weatherForecast.cod))
 {
-    <div class="row" style="margin-left:30px; text-align: center">        
+    <div class="row" style="margin-left:15px; text-align: center">        
         <h3 style="color: #eb6e4b; margin-top: 20px">The city was not found or data is empty please try again</h3>
         <br/>
         <div>
