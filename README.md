@@ -67,3 +67,12 @@ URL to get dinamycally get the weather icon: http://openweathermap.org/img/w/
 
 ![image](https://user-images.githubusercontent.com/34136023/160299484-e96b4aa6-c526-4d12-a4fc-d15bcef64015.png)
 
+
+**SMALL SCREENS - RESPONSIVE**
+
+![image](https://user-images.githubusercontent.com/34136023/160300583-e77a4b71-1a91-4538-9bf1-5a2131e5607a.png)
+
+![image](https://user-images.githubusercontent.com/34136023/160300592-3abbca38-4f99-464e-ac9d-0db7f32cde26.png)
+
+![image](https://user-images.githubusercontent.com/34136023/160300615-cc8bc67a-9052-4ecb-9f8d-2ac09291eee6.png)
+
