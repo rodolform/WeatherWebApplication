@@ -23,13 +23,15 @@ namespace IDB_Weather.Pages
         public string lon { get; set; }
 
         public WeatherForecast weatherForecast { get; set; }
-        public Units units { get; set; } = Units.imperial;
+        public Units units { get; set; }
 
         /// <summary>
         /// Initialize screen
         /// </summary>
         protected override void OnInitialized()
         {
+            units = AppState.SelectedUnit ? Units.metric : Units.imperial;
+
             //This will allow to cascade the selected value from NavMenu component
             AppState.OnChange += Reload;
 

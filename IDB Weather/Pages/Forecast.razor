@@ -10,9 +10,9 @@
 {
     <div class="row" style="margin-left:15px;">
         <div class="col-5">
-            <span class="labelSmallBoldOrangeRed">
+            <h5>
                 @DateTime.Now.ToLongDateString(), @DateTime.Now.ToLongTimeString()
-            </span>
+            </h5>
             <br/>
             @if(weatherForecast != null || !string.IsNullOrEmpty(weatherForecast.cod))
             {
