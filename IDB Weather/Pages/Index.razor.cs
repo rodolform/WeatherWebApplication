@@ -50,7 +50,14 @@ namespace IDB_Weather.Pages
         {
             if (firstRender)
             {
-                await GetCurrentPositionAndRefreshDataAsync();
+                if (string.IsNullOrEmpty(AppState.SelectedCity))
+                {
+                    await GetCurrentPositionAndRefreshDataAsync();
+                }
+                else
+                {
+                    await GetCityPositionAndRefreshDataAsync(AppState.SelectedCity);
+                }
             }
         }
 
