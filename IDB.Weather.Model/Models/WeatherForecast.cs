@@ -1,6 +1,6 @@
-﻿using IDB_Weather.Helper;
+﻿using IDB.Weather.Model.Helper;
 
-namespace IDB_Weather.Data.ModelForecast
+namespace IDB.Weather.Model.ModelForecast
 {
     public class Main
     {

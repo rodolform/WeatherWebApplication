@@ -1,7 +1,6 @@
-﻿using Darnton.Blazor.DeviceInterop.Geolocation;
-using IDB_Weather.Data.ModelForecast;
-using IDB_Weather.Data.Models;
-using Microsoft.AspNetCore.Components;
+﻿
+using IDB.Weather.Model.ModelForecast;
+using IDB.Weather.Model.Models;
 using System.Text.Json;
 
 namespace IDB_Weather.Services

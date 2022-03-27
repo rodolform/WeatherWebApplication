@@ -1,4 +1,4 @@
-﻿namespace IDB_Weather.Data.Models
+﻿namespace IDB.Weather.Model.Models
 {
     public enum Units
     {

@@ -1,4 +1,4 @@
-﻿namespace IDB_Weather.Helper
+﻿namespace IDB.Weather.Model.Helper
 {
     public class AppState
     {

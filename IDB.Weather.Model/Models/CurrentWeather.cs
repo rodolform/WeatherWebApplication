@@ -1,6 +1,6 @@
-﻿using IDB_Weather.Helper;
+﻿using IDB.Weather.Model.Helper;
 
-namespace IDB_Weather.Data.Models
+namespace IDB.Weather.Model.Models
 {   
     public class Coord
     {
