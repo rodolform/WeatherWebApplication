@@ -56,28 +56,16 @@
                 <ul class="weather-items orange-side standard-padding no-bullets">
                     <li>
                         <div>
-                           <SummaryComponent weatherForecast=@weatherForecast units=@units />
+                            <SummaryComponent weatherForecast=@weatherForecast units=@units />
                         </div>
                     </li>
-                </ul>                
+                </ul>
             </div>
             </div>
         </div>
     </div>
 }
-
 @if(weatherForecast == null || string.IsNullOrEmpty(weatherForecast.@base))
 {
     <EmptyDataComponent />
 }
-
-<ErrorBoundary>
-    <ChildContent>
-        
-    </ChildContent>
-    <ErrorContent>
-        <div class="alert alert-danger">
-            There was an error! 
-        </div>
-    </ErrorContent>
-</ErrorBoundary>

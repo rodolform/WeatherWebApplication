@@ -38,7 +38,20 @@
             </div>
 
             <article class="content px-4">
-                @Body
+                <ErrorBoundary @ref="@errorBoundary">
+                    <ChildContent>
+                        @Body
+                        </ChildContent>
+                        <ErrorContent>
+                            <div class="alert alert-danger">
+                                <div style="display: flex">
+                                     <span class="oi oi-x" style="font-size: 2rem"></span>
+                                    &nbsp;
+                                    <b style="margin-left: 10px; margin-top: 8px">Sorry there was an error!</b>
+                                </div>                               
+                            </div>                            
+                        </ErrorContent>
+                    </ErrorBoundary>
             </article>
         </main>
     </div>
@@ -47,6 +60,12 @@
 @code
 {
     string City;
+    private ErrorBoundary errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
 
     public void OnModeChanged(bool unit)
     {
