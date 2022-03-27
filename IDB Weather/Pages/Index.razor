@@ -21,7 +21,14 @@
             <div class="row">
                 <div class="col-12" style="display:flex">                
                     <img src="@weatherForecast?.iconUrl" style="height: 5rem"/>
-                    <h1>@weatherForecast?.main?.temp°@(units == Units.imperial ? "F" : "C")</h1>                 
+                    <h1>@weatherForecast?.main?.temp°@(units == Units.imperial ? "F" : "C")</h1>                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h4>@weatherForecast?.weather?.FirstOrDefault()?.main
+                        Feels like @weatherForecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C")
+                    </h4>
                 </div>
             </div>
         </div>
@@ -33,7 +40,7 @@
                 <div class="col-12">
                     <br/>
                     <div class="row">
-                        <div class="col-6">                
+                        <div class="col-6">
                             <h4>min: <b>@weatherForecast?.main?.temp_min°@(units == Units.imperial ? "F" : "C")</b></h4>                 
                         </div>
                         <div class="col-6">                
@@ -59,10 +66,10 @@
             <div class="col-12">
                 <br/>
                 <div>
-                <b>
-                    Feels like @weatherForecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C") |
-                    @weatherForecast?.weather?.FirstOrDefault()?.main | @weatherForecast?.weather?.FirstOrDefault()?.description
+                <b>                    
+                Precipitation: @weatherForecast?.clouds.all% @weatherForecast?.weather?.FirstOrDefault()?.description
                 </b>
+                <br/>
                 <ul class="weather-items orange-side standard-padding no-bullets">
                     <li>
                         <div>

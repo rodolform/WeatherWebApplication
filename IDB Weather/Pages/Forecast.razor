@@ -75,7 +75,10 @@
                                  <span class="labelSmallBold">
                                         Feels like @forecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C")
                                         <br/>
-                                        @forecast?.weather?.FirstOrDefault()?.description
+                                         <b>                    
+                                            Precipitation: @forecast?.clouds.all% @forecast?.weather?.FirstOrDefault()?.description
+                                         </b>
+                                        @*@forecast?.weather?.FirstOrDefault()?.description*@
                                  </span>
                             </div>
                         </td>
