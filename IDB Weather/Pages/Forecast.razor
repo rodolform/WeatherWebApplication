@@ -6,18 +6,15 @@
 <PageTitle>IDB Weather</PageTitle>
 
 <br/>
-@if (weatherForecast != null)
+@if (weatherForecast != null && !string.IsNullOrEmpty(weatherForecast.cod))
 {
     <div class="row" style="margin-left:15px;">
         <div class="col-5">
             <h5>
                 @DateTime.Now.ToLongDateString(), @DateTime.Now.ToLongTimeString()
             </h5>
-            <br/>
-            @if(weatherForecast != null || !string.IsNullOrEmpty(weatherForecast.cod))
-            {
-                <h1 style="font-weight: bold">@weatherForecast?.city.name | @weatherForecast?.city.country</h1>
-            }  
+            <br/>            
+            <h1 style="font-weight: bold">@weatherForecast?.city?.name | @weatherForecast?.city?.country</h1>
         </div>
     </div>
     <br/>
@@ -76,7 +73,7 @@
                                         Feels like @forecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C")
                                         <br/>
                                          <b>                    
-                                            Precipitation: @forecast?.clouds.all% @forecast?.weather?.FirstOrDefault()?.description
+                                            Precipitation: @forecast?.clouds?.all% @forecast?.weather?.FirstOrDefault()?.description
                                          </b>
                                  </span>
                             </div>

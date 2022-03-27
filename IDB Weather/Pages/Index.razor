@@ -6,7 +6,7 @@
 <PageTitle>IDB Weather</PageTitle>
 
 <br/>
-@if (weatherForecast != null)
+@if (weatherForecast != null && !string.IsNullOrEmpty(weatherForecast.name))
 {
     <div class="row" style="margin-left:15px;">
         <h5>
@@ -50,7 +50,7 @@
                 <br/>
                 <div>
                 <b>                    
-                Precipitation: @weatherForecast?.clouds.all% @weatherForecast?.weather?.FirstOrDefault()?.description
+                Precipitation: @weatherForecast?.clouds?.all% @weatherForecast?.weather?.FirstOrDefault()?.description
                 </b>
                 <br/>
                 <ul class="weather-items orange-side standard-padding no-bullets">
