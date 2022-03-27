@@ -1,5 +1,7 @@
 # WeatherWebApplication
-Code challenge from IDB to Show the current wather based on the geolocation and the next 5 days and as an extra the application also allows user to enter the city name to show the weather. Coded and designed by Rodolfo Ruiz Morales - March, 27 2022 for the InterAmerican Development Bank
+Code challenge from IDB to Show the current wather based on the geolocation and the next 5 days and as an extra the application also allows user to enter the city name to show the weather. 
+
+**Coded and designed by Rodolfo Ruiz Morales - March, 27 2022 for the InterAmerican Development Bank**
 
 **Technology stack:**
 Visual Studio 2022
