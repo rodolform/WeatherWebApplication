@@ -13,10 +13,11 @@
             @DateTime.Now.ToLongDateString(), @DateTime.Now.ToLongTimeString()
         </h5>
         <div class="col-5">
-            <br/>
-            <h1 style="font-weight: bold">
-                @weatherForecast?.name | @weatherForecast?.sys?.country
-            </h1>
+            <br/>            
+            @if(weatherForecast != null || !string.IsNullOrEmpty(weatherForecast.@base))
+            {
+                <h1 style="font-weight: bold">@weatherForecast?.name | @weatherForecast?.sys?.country</h1>
+            }            
             <div class="row">
                 <div class="col-12" style="display:flex">                
                     <img src="@weatherForecast?.iconUrl" style="height: 5rem"/>
@@ -115,13 +116,13 @@
     </div>
 }
 
-@if(weatherForecast ==null || string.IsNullOrEmpty(weatherForecast.@base))
+@if(weatherForecast == null || string.IsNullOrEmpty(weatherForecast.@base))
 {
     <div class="row" style="margin-left:15px; text-align: center">        
         <h3 style="color: #eb6e4b; margin-top: 20px">The city was not found or data is empty please try again</h3>
         <br/>
         <div>
-            <img src="/images/noresults.gif"/>
+            <img style="width: 60%" src="/images/noresults.gif"/>
         </div>
     </div>
 }

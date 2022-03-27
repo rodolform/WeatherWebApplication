@@ -14,9 +14,10 @@
                 @DateTime.Now.ToLongDateString(), @DateTime.Now.ToLongTimeString()
             </span>
             <br/>
-            <h1 style="font-weight: bold">
-                @weatherForecast?.city.name | @weatherForecast?.city.country
-            </h1>
+            @if(weatherForecast != null || !string.IsNullOrEmpty(weatherForecast.cod))
+            {
+                <h1 style="font-weight: bold">@weatherForecast?.city.name | @weatherForecast?.city.country</h1>
+            }  
         </div>
     </div>
     <br/>
@@ -136,7 +137,7 @@
         <h3 style="color: #eb6e4b; margin-top: 20px">The city was not found or data is empty please try again</h3>
         <br/>
         <div>
-            <img src="/images/noresults.gif"/>
+             <img style="width: 60%" src="/images/noresults.gif"/>
         </div>
     </div>
 }
