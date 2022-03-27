@@ -1,0 +1,28 @@
+﻿
+
+<br/>            
+@if(weatherForecast != null || !string.IsNullOrEmpty(weatherForecast.@base))
+{
+    <h1 style="font-weight: bold">@weatherForecast?.name | @weatherForecast?.sys?.country</h1>
+}            
+<div class="row">
+    <div class="col-12" style="display:flex">                
+        <img src="@weatherForecast?.iconUrl" style="height: 5rem"/>
+        <h1>@weatherForecast?.main?.temp°@(units == Units.imperial ? "F" : "C")</h1>                    
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <h4>@weatherForecast?.weather?.FirstOrDefault()?.main
+            Feels like @weatherForecast?.main?.feels_like°@(units == Units.imperial ? "F" : "C")
+        </h4>
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public CurrentWeather weatherForecast { get; set; }
+    [Parameter]
+    public Units units { get; set; }
+}
