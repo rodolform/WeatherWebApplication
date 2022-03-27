@@ -12,14 +12,14 @@
 
         <main>
             <div class="top-row px-4">
-                <div class="col-12" style="display:flex; width: 100%">                    
+                <div class="col-12" style="display:flex; width: 100%">
                     <div class="col-10">
                         <div style="display: flex; margin-top: 4px">
-                            <FluentTextField Placeholder="Search city" @bind-Value="@City" style="width: 30%" />
+                            <FluentTextField Placeholder="Search city" @bind-Value="@City" style="width: 30%" />                            
                             <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth" @onclick="OnClickFindLocation">
                                 <span class="oi oi-magnifying-glass"></span>
                             </FluentButton>
-                           <FluentButton style="margin-left: 1px" Appearance="Appearance.Stealth" @onclick="OnClickCurrentLocation">
+                           <FluentButton style="margin-left: 1px" Appearance="@(isGeolocated ? Appearance.Accent : Appearance.Stealth)" @onclick="OnClickCurrentLocation">
                                 <span class="oi oi-map-marker"></span>
                             </FluentButton>
                             <div style="display: flex; margin: 8px 20px">
@@ -45,7 +45,7 @@
                         <ErrorContent>
                             <div class="alert alert-danger">
                                 <div style="display: flex">
-                                     <span class="oi oi-x" style="font-size: 2rem"></span>
+                                     <span class="oi oi-circle-x" style="font-size: 2rem"></span>
                                     &nbsp;
                                     <b style="margin-left: 10px; margin-top: 8px">Sorry there was an error!</b>
                                 </div>                               
@@ -61,6 +61,7 @@
 {
     string City;
     private ErrorBoundary errorBoundary;
+    public bool isGeolocated { get; set; } = true;
 
     protected override void OnParametersSet()
     {
@@ -73,12 +74,18 @@
     }
 
     public void OnClickCurrentLocation()
-    {
+    {        
+        isGeolocated = true;
+        City = string.Empty;
         AppState.SetCurrentLocation();
     }
 
     public void OnClickFindLocation()
     {
-        AppState.SetCity(City);
+        if(!string.IsNullOrEmpty(City))
+        {
+            isGeolocated = false;
+            AppState.SetCity(City);
+        }       
     }
 }
